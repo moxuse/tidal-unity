@@ -55,7 +55,7 @@ z
 
 
 ```
-duratioin
+duration
 ```
 
 - Float : object life time in cycle. 1 is 1cycle. (default 0.5)
