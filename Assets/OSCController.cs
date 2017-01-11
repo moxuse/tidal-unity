@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,22 +8,17 @@ using UnityOSC;
 
 public class OSCController : MonoBehaviour {
 	
-	static string TargetAddr = "127.0.0.1";
-	static int OutGoingPort = 5001;
-	static int InComingPort = 5000;
-
-	private GameObject apple;
-	private GameObject banana;
-	private GameObject bottle;
+	[SerializeField]string _TargetAddr = "127.0.0.0";
+	[SerializeField]int _OutGoingPort = 5001;
+	[SerializeField]int _InComingPort = 5000;
 
 	private Queue queue;
 
-	void Start() {  
-		OSCHandler.Instance.Init(TargetAddr, OutGoingPort, InComingPort);
+	public delegate void onMsgDelegate(OSCMessage msg);
+	public event onMsgDelegate onMsg = null;
 
-		apple = Resources.Load("Items/Apple/Apple",typeof(GameObject))as GameObject;
-		banana = Resources.Load("Items/Banana/Banana",typeof(GameObject))as GameObject;
-		bottle = Resources.Load("Items/PetBottles/Pet",typeof(GameObject))as GameObject;
+	void Start() {  
+		OSCHandler.Instance.Init(_TargetAddr, _OutGoingPort, _InComingPort);
 
 		queue = new Queue();
 		queue = Queue.Synchronized(queue);
@@ -51,34 +47,11 @@ public class OSCController : MonoBehaviour {
 				OSCMessage msg = packet as OSCMessage;
 
 				if ("/unity_osc" == msg.Address) {
-					print (msg.Data[1].ToString());
-					var thing = msg.Data [1].ToString ();
-					var pos = new Vector3((float)msg.Data[2], (float)msg.Data[3], (float)msg.Data[4]);
-					var dur = (float)packet.Data[5];
-					print (dur); 
-					AppendItem (thing, pos, dur);
+					if (onMsg != null) {
+						onMsg (msg);
+					}
 				}
 			}
 		}
-	}
-
-	void AppendItem (String item, Vector3 pos, float dur) {
-		GameObject thing = apple;
-		switch (item) {
-			case "apple":
-				thing = apple;
-				break;
-			case "banana":
-				thing = banana;
-				break;
-			case "bottle":
-				thing = bottle;
-				break;
-		}
-		if (thing == null) {
-				return;
-			}
-		var clone = Instantiate(thing, pos, Quaternion.identity);	
-		Destroy(clone, dur * 1.0f);
 	}
 }
