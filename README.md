@@ -5,7 +5,7 @@ TidalUnity
 
 put```Module/UnityOsc.hs```file to your $HOME```~```
 
-then, boot TildalCycles.
+then, boot TidalCycles.
 
 excute below in your editor within TidalCycles context.
 
@@ -15,7 +15,7 @@ excute below in your editor within TidalCycles context.
 v1 <- unityStream
 ```
 
-then livecode in Tidal.
+livecode in Tidal.
 
 ```
 v1 $ thing "apple"
@@ -23,15 +23,15 @@ v1 $ thing "apple"
 
 ##Prepare Assets
 
-TidalUnity will load all '.prefab' file in
+TidalUnity attempts to load all '.prefab' file in
 
 ``Assets/Resources/Things``
 
-when it's booting.
+when it boot.
 
-Please make ``Assets/Resources/Things`` directory and put your game objects. 
+Please make ``Assets/Resources/Things`` directory and put your game-objects. 
 
-Tidal's parameter ```thing```will mach prefab's file name(whithout extension).
+Tidal's parameter ```thing```will match prefab file's name(whithout extension).
 
 ##Parameters
 
@@ -58,6 +58,6 @@ z
 duration
 ```
 
-- Float : object life time in cycle. 1 is 1cycle. (default 0.5)
+- Float : object's life time in cycle. 1 is 1cycle. (default 0.5)
 
 
