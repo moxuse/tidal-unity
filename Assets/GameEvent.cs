@@ -38,8 +38,13 @@ public class GameEvent : MonoBehaviour {
 
 			var pos = new Vector3((float)msg.Data[2], (float)msg.Data[3], (float)msg.Data[4]);
 			var dur = (float)msg.Data[5];
+			var twist = (float)msg.Data[6];
 
 			GameObject thing = things[thing_str];
+
+			if (0 < twist) {
+				ApplyShader(thing, "Custom/Twist", twist);
+			}
 
 			AppendItem(thing, pos, dur);
 		};
@@ -53,5 +58,17 @@ public class GameEvent : MonoBehaviour {
 	void AppendItem (GameObject thing, Vector3 pos, float dur) {
 		var clone = Instantiate(thing, pos, Quaternion.identity);	
 		Destroy(clone, dur * 1.0f);
+	}
+
+	void ApplyShader (GameObject thing, string shaderName, float val) {
+		Debug.Log("setShaderToGameobject started: " + thing.name + " / " + shaderName);
+		var shader = Shader.Find(shaderName);
+		//foreach (Transform t in thing.GetComponentsInChildren<Transform>()) {
+			foreach (var renderer in thing.GetComponents<Renderer>()) {
+				//foreach (var material in renderer.material) {
+			renderer.sharedMaterial.shader = shader;
+				//}
+			}
+		//}
 	}
 }
