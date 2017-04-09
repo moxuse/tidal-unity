@@ -9,7 +9,7 @@ TidalUnity
 
 [https://vimeo.com/198320403](https://vimeo.com/198320403)
 
-##Installation
+## Installation
 
 put```Module/UnityOsc.hs```file to your $HOME```~```
 
@@ -29,7 +29,7 @@ livecode in Tidal.
 v1 $ thing "apple"
 ```
 
-##Prepare Assets
+## Prepare Assets
 
 TidalUnity attempts to load all '.prefab' file in
 
@@ -41,7 +41,7 @@ Please make ``Assets/Resources/Things`` directory and put your game-objects.
 
 Tidal's parameter ```thing```will match prefab file's name(whithout extension).
 
-##Parameters
+## Parameters
 
 ```
 x 
@@ -68,4 +68,25 @@ duration
 
 - Float : object's life time in second. 1 is 1 second. (default 0.5)
 
+
+**belows are very experimental parameters**
+
+```
+twist
+```
+
+- Float : freqency of 'twist' geometry shader. this effect gives object be twisted.
+
+```
+rigid
+```
+
+- Int : if 0 < rigid, object will be calicurated phisics.
+
+
+```
+randCam
+```
+
+- Float : speed of random camera transition.
 
