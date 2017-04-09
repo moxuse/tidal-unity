@@ -1,6 +1,6 @@
 ﻿Shader "Custom/Twist" {
 	Properties {
-		_Freq ("Freq", Range(0,20)) = 0.5
+		_Freq ("Freq", Range(0,20)) = 0.0
 		_Color ("Color", Color) = (1,1,1,1)
 	}
 	SubShader {
@@ -30,6 +30,7 @@
 		void surf (Input IN, inout SurfaceOutput o) {
 			// Albedo comes from a texture tinted by color
 			o.Albedo = half3(1, 1, 1);
+			// o.Albedo = _Color;
 		}
 		ENDCG
 	}
