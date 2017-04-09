@@ -40,11 +40,16 @@ public class GameEvent : MonoBehaviour {
 			var dur = (float)msg.Data[5];
 			var twist = (float)msg.Data[6];
 			var rigid = (int)msg.Data[7];
+			var randCam = (float)msg.Data[8];
 
 			GameObject thing = things[thing_str];
 
 			if (0 < twist) {
 				ApplyShader(thing, "Custom/Twist", twist);
+			}
+
+			if (0 < randCam) {
+				this.RandCamera(randCam);
 			}
 
 			AppendItem(thing, pos, dur, rigid);
@@ -67,6 +72,11 @@ public class GameEvent : MonoBehaviour {
 			rigidbody.useGravity = true;
 		}
 		Destroy(clone, dur * 1.0f);
+	}
+
+	void RandCamera (float speed) {
+		SpringCamera cam = GameObject.Find("SpringCamera").GetComponent<SpringCamera> ();
+		cam.NextPosition(speed);
 	}
 
 	void ApplyShader (GameObject thing, string shaderName, float val) {
