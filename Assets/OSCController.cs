@@ -28,7 +28,11 @@ public class OSCController : MonoBehaviour {
 	}
 
 	void OnPacketReceived(OSCServer server, OSCPacket packet) {
-		queue.Enqueue(packet);
+		if (1 <= queue.Count) {
+			return;
+		} else {
+			queue.Enqueue (packet);
+		}
 	}
 
 	void Update() {		
