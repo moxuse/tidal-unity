@@ -89,12 +89,12 @@ public class GameEvent : MonoBehaviour {
 		
 			//foreach (var material in renderer.material) {
 			Material material = new Material(shader);
+			material.CopyPropertiesFromMaterial(renderer.sharedMaterial);
+
+			material.SetTexture("Base (RGB)", renderer.sharedMaterial.mainTexture);
+			material.SetFloat ("_Freq", val);
 			renderer.material = material;
-			//renderer.material.shader = shader;
 
-			renderer.sharedMaterial.SetFloat ("_Freq", val);
-
-			//}
 
 		}
 
