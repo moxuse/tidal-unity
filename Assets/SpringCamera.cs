@@ -35,12 +35,13 @@ public class SpringCamera : MonoBehaviour
 	}
 
 	public void NextPosition (float speed) {
-		this.nextCamPosX = Random.Range(-3.0f, 3.0f);
-		this.nextCamPosY = Random.Range (0.2f, 1.7f);
-		this.nextCamPosZ = Random.Range (-3.0f, 3.0f);
+		float rand_fact_x = Random.Range (0.0f, 3.3f) +  0.7f;
+		float rand_fact_z = Random.Range (0.0f, 3.3f) +  0.7f;
+		this.nextCamPosX = (Random.Range(-1.0f * rand_fact_x, rand_fact_x));
+		this.nextCamPosY = Random.Range (0.5f, 1.7f);
+		this.nextCamPosZ = (Random.Range (-1.0f * rand_fact_z, rand_fact_z));
 		this.friction = Random.Range (0.4f, 0.8f);
 		this.spring = Random.Range (0.1f, 0.2f) * speed;
-
 	}
 
 	Vector3 animateCamera () {
