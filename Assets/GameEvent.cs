@@ -23,7 +23,7 @@ public class GameEvent : MonoBehaviour {
 
 			if (value != null) {
 				things.Add (key, value);
-				Debug.Log (key, value);
+				//Debug.Log (key, value);
 			} else {
 				Debug.Log ("couldnt load object: " + key);
 			}
@@ -37,22 +37,25 @@ public class GameEvent : MonoBehaviour {
 			var thing_str = msg.Data [1].ToString ();
 
 			var pos = new Vector3((float)msg.Data[2], (float)msg.Data[3], (float)msg.Data[4]);
-			var dur = (float)msg.Data[5];
-			var twist = (float)msg.Data[6];
-			var rigid = (int)msg.Data[7];
-			var randCam = (float)msg.Data[8];
+			var scale = (float)msg.Data[5];
+			var dur = (float)msg.Data[6];
+			var twist = (float)msg.Data[7];
+			var rigid = (int)msg.Data[8];
+			var randCam = (float)msg.Data[9];
 
 			GameObject thing = things[thing_str];
-
 			if (0 < twist) {
+				//Debug.Log("apply");
 				ApplyShader(thing, "Custom/Twist", twist);
+			} else {
+				//Debug.Log("not apply");
 			}
 
 			if (0 < randCam) {
 				this.RandCamera(randCam);
 			}
-
-			AppendItem(thing, pos, dur, rigid);
+			//Debug.Log(scale);
+			AppendItem(thing, pos, scale, dur, rigid);
 		};
 	}
 	
@@ -61,7 +64,7 @@ public class GameEvent : MonoBehaviour {
 		
 	}
 
-	void AppendItem (GameObject thing, Vector3 pos, float dur, int rigid) {
+	void AppendItem (GameObject thing, Vector3 pos, float scale, float dur, int rigid) {
 		var clone = Instantiate (thing, pos, Quaternion.identity);
 		if (0 < rigid) {
 			clone.AddComponent<Rigidbody> (); // Add the rigidbody.
@@ -71,6 +74,8 @@ public class GameEvent : MonoBehaviour {
 			collider.convex = true;
 			rigidbody.useGravity = true;
 		}
+		clone.transform.localScale = new Vector3(scale,scale,scale);
+
 		Destroy(clone, dur * 1.0f);
 	}
 

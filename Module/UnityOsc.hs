@@ -16,6 +16,7 @@ unityShape = Shape {
     F "x" (Just 0),
     F "y" (Just 0),
     F "z" (Just 0),
+    F "vscale" (Just 1.0),
     F "duration" (Just 0.5),
     F "twist" (Just 0),
     I "rigid" (Just 0),
@@ -41,6 +42,7 @@ thing = makeS unityShape "thing"
 x = makeF unityShape "x"
 y = makeF unityShape "y"
 z = makeF unityShape "z"
+vscale = makeF unityShape "vscale"
 duration = makeF unityShape "duration"
 twist = makeF unityShape "twist"
 rigid = makeI unityShape "rigid"
