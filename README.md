@@ -1,9 +1,12 @@
 TidalUnity
 ---
 
+TidalUnity is the middle-ware of visual livecode tool. It bridges control patterns that was generated with [TidalCycles](https://tidalcycles.org) to visual renderer on Unity engine.
+
+
 ![demo.gif](media/demo.gif)
 
-##demo
+## demo
 
 [https://vimeo.com/198314806](https://vimeo.com/198314806)
 
