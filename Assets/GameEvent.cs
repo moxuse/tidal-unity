@@ -42,6 +42,9 @@ public class GameEvent : MonoBehaviour {
 			var twist = (float)msg.Data[7];
 			var rigid = (int)msg.Data[8];
 			var randCam = (float)msg.Data[9];
+			var vortexRadX = (float)msg.Data[10];
+			var vortexRadY = (float)msg.Data[11];
+			var vortexAngle = (float)msg.Data[12];
 
 			GameObject thing = things[thing_str];
 			if (0 < twist) {
@@ -54,6 +57,11 @@ public class GameEvent : MonoBehaviour {
 			if (0 < randCam) {
 				this.RandCamera(randCam);
 			}
+
+			//if (0 != vortexAngle) {
+				this.Vortex(vortexRadX, vortexRadY, vortexAngle);
+			//}
+				
 			//Debug.Log(scale);
 			AppendItem(thing, pos, scale, dur, rigid);
 		};
@@ -104,5 +112,12 @@ public class GameEvent : MonoBehaviour {
 		}
 
 		//}
+	}
+
+	void Vortex(float radX, float raadY, float angle) {
+		var sp_camera = GameObject.Find("SpringCamera").GetComponent<SpringCamera>();
+		if (sp_camera) {
+			sp_camera.SetVortex(radX, raadY, angle);
+		}
 	}
 }

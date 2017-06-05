@@ -20,10 +20,13 @@ unityShape = Shape {
     F "duration" (Just 0.5),
     F "twist" (Just 0),
     I "rigid" (Just 0),
-    F "randCam" (Just 0)
+    F "randCam" (Just 0),
+    F "vortexRadX" (Just 0.5),
+    F "vortexRadY" (Just 0.5),
+    F "vortexAngle" (Just 0)
   ],
   cpsStamp = True,
-  latency = 0.02
+  latency = 0.1
 
 }
 
@@ -47,3 +50,9 @@ duration = makeF unityShape "duration"
 twist = makeF unityShape "twist"
 rigid = makeI unityShape "rigid"
 randCam = makeF unityShape "randCam"
+vortexRadX = makeF unityShape "vortexRadX"
+vortexRadY = makeF unityShape "vortexRadY"
+vortexAngle = makeF unityShape "vortexAngle"
+
+vortex x y angle = vortexRadX x |+| vortexRadY y |+| vortexAngle angle
+

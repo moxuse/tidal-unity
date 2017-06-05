@@ -23,7 +23,7 @@ public class SpringCamera : MonoBehaviour
 		this.mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
 		this.mainCam.transform.position = this.animateCamera();
-		this.NextPosition (1.0f);
+		this.BasePosition (1.0f);
 	}
 	
 	// Update is called once per frame
@@ -34,9 +34,17 @@ public class SpringCamera : MonoBehaviour
 		this.mainCam.transform.LookAt(new Vector3 (0, 0.5f, 0));
 	}
 
+	public void BasePosition (float speed) {
+		this.nextCamPosX = -0.6f;
+		this.nextCamPosY = 1.6f;
+		this.nextCamPosZ = -1.38f;
+		this.friction = Random.Range (0.4f, 0.8f);
+		this.spring = Random.Range (0.1f, 0.2f) * speed;
+	}
+
 	public void NextPosition (float speed) {
-		float rand_fact_x = Random.Range (0.0f, 3.3f) +  0.7f;
-		float rand_fact_z = Random.Range (0.0f, 3.3f) +  0.7f;
+		float rand_fact_x = Random.Range (0.0f, 1.3f) +  2.7f;
+		float rand_fact_z = Random.Range (0.0f, 1.3f) +  2.7f;
 		this.nextCamPosX = (Random.Range(-1.0f * rand_fact_x, rand_fact_x));
 		this.nextCamPosY = Random.Range (0.5f, 1.7f);
 		this.nextCamPosZ = (Random.Range (-1.0f * rand_fact_z, rand_fact_z));
@@ -62,6 +70,13 @@ public class SpringCamera : MonoBehaviour
 		this.curCamPosZ += this.speedZ;
 
 		return new Vector3( this.curCamPosX, this.curCamPosY, this.curCamPosZ );
+	}
+
+	public void SetVortex (float radX, float radY, float angle) {
+		var vortex = this.mainCam.GetComponent<Vortex>();
+		vortex.radius.x = radX;
+		vortex.radius.y = radY;
+		vortex.angle = angle;
 	}
 }
 
