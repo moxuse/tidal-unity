@@ -90,7 +90,7 @@ randCam
 vortex
 ```
 
-- x : Float : vortex distortion.
-- y : Float : vortex distortion.
-- z : Float : vortex distortion.
+- x : Float : x scale of vortex distortion.
+- y : Float : y scale of vortex distortion.
+- angle : Float : angle of vortex distortion.
 
