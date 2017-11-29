@@ -67,7 +67,7 @@ public class GameEvent : MonoBehaviour {
 		};
 	}
 	
-	// Update is called once per frame
+	// Update is called once per a frame
 	void Update () {
 		
 	}
@@ -81,6 +81,13 @@ public class GameEvent : MonoBehaviour {
 			Rigidbody rigidbody = clone.GetComponent<Rigidbody> ();
 			collider.convex = true;
 			rigidbody.useGravity = true;
+		} else {
+			if ("NoMesh" == clone.tag) {
+				SphereCollider collider = clone.GetComponent<SphereCollider> ();
+				if (collider) {
+					collider.enabled = false;
+				}
+			}
 		}
 		clone.transform.localScale = new Vector3(scale,scale,scale);
 
@@ -99,7 +106,6 @@ public class GameEvent : MonoBehaviour {
 		//foreach (Transform t in thing.GetComponentsInChildren<Transform>()) {
 
 		foreach (var renderer in thing.GetComponents<Renderer>()) {
-		
 			//foreach (var material in renderer.material) {
 			Material material = new Material(shader);
 			material.CopyPropertiesFromMaterial(renderer.sharedMaterial);
@@ -107,10 +113,7 @@ public class GameEvent : MonoBehaviour {
 			material.SetTexture("Base (RGB)", renderer.sharedMaterial.mainTexture);
 			material.SetFloat ("_Freq", val);
 			renderer.material = material;
-
-
 		}
-
 		//}
 	}
 
