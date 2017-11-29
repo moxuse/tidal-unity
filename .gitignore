@@ -31,3 +31,7 @@ sysinfo.txt
 *.unitypackage
 
 testOscTidal.app
+
+Assets/Air_Conditioner
+Assets/Resources/ImageEffects/*
+
