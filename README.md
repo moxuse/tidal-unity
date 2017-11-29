@@ -50,46 +50,47 @@ Tidal's parameter ```thing```will match prefab file's name(whithout extension).
 x 
 ```
 
-- Float : x position in 3D space. (default 0)
+- value : Float : x position in 3D space. (default 0)
 
 ```
 y
 ```
 
-- Float : y position in 3D space. (default 0)
+- value : Float : y position in 3D space. (default 0)
 
 ```
 z
 ```
 
-- Float : z position in 3D space. (default 0)
+- value : Float : z position in 3D space. (default 0)
 
 
 ```
 duration
 ```
 
-- Float : object's life time in second. 1 is 1 second. (default 0.5)
+- value : Float : object's life time in second. 1 is 1 second. (default 0.5)
 
-
-**belows are very experimental parameters**
-
-```
-twist
-```
-
-- Float : freqency of 'twist' geometry shader. this effect gives object be twisted.
 
 ```
 rigid
 ```
 
-- Int : if 0 < rigid, object will be calicurated phisics.
+- value : Int : if 0 < rigid, object will be calicurated phisics.
 
 
 ```
 randCam
 ```
 
-- Float : speed of random camera transition.
+- speed : Float : speed of random camera transition.
+
+
+```
+vortex
+```
+
+- x : Float : vortex distortion.
+- y : Float : vortex distortion.
+- z : Float : vortex distortion.
 
