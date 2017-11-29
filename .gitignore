@@ -33,5 +33,14 @@ sysinfo.txt
 testOscTidal.app
 
 Assets/Air_Conditioner
+Assets/Air_Conditioner.meta
 Assets/Resources/ImageEffects/*
+Assets/Materials.meta
+Assets/Materials/defaultMat.mat
+Assets/Materials/defaultMat.mat.meta
+Assets/Resources/Shaders/*
+Assets/Resources/New\ Physic\ Material.physicMaterial
+Assets/Resources/New\ Physic\ Material.physicMaterial.meta
+
+
 
