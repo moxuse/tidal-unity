@@ -34,7 +34,7 @@ public class GameEvent : MonoBehaviour {
 		osc_controller.onMsg += (msg) => {
 
 			//print (msg.Data[1].ToString());
-			var thing_str = msg.Data [1].ToString ();
+			var thing_str = msg.Data[1].ToString();
 
 			var pos = new Vector3((float)msg.Data[2], (float)msg.Data[3], (float)msg.Data[4]);
 			var scale = (float)msg.Data[5];
