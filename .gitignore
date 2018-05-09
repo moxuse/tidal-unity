@@ -5,6 +5,7 @@
 /[Bb]uilds/
 /Assets/AssetStoreTools*
 /Assets/Resources/Things
+/Assets/Resources/SkyBoxes
 
 ExportedObj/
 .consulo/
@@ -43,4 +44,4 @@ Assets/Resources/New\ Physic\ Material.physicMaterial
 Assets/Resources/New\ Physic\ Material.physicMaterial.meta
 
 
-
+*.app
