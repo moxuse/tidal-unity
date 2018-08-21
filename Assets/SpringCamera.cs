@@ -78,5 +78,10 @@ public class SpringCamera : MonoBehaviour
 		vortex.radius.y = radY;
 		vortex.angle = angle;
 	}
+
+	public void SetRipple (float radius)  {
+		var ripple = this.mainCam.GetComponent<Ripple>();
+		ripple.radius = radius;
+	}
 }
 
