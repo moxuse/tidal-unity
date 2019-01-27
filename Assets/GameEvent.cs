@@ -77,14 +77,12 @@ public class GameEvent : MonoBehaviour {
 			var dLight = (string)msg.Data[16];
 
 			GameObject thing = things[thing_str];
-			// if (0 < twist) {
-				//Debug.Log("apply");
-			if (thing) {
+
+			if (0 < twist) {
 				ApplyShader(thing, "Custom/Twist", twist);
+			} else {
+				Debug.Log("not apply");
 			}
-			// } else {
-				//Debug.Log("not apply");
-			// }
 
 			if (0 < randCam) {
 				this.RandCamera(randCam);
@@ -105,7 +103,9 @@ public class GameEvent : MonoBehaviour {
 			}
 
 			//Debug.Log(scale);
-			AppendItem(thing, pos, move, scale * offsetScale, dur, rigid);
+			if (thing) {
+				AppendItem(thing, pos, move, scale * offsetScale, dur, rigid);
+			}
 		};
 
 		osc_controller.onBang += (msg) => {
