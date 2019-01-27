@@ -11,9 +11,13 @@ public class GameEvent : MonoBehaviour {
 	private Dictionary<string, Material> skyboxes;
 	private GameObject plane;
 	private GameObject dirLight;
+
+	private float offsetScale;
+	
 	private string currentSkyboxName;
 
 	void Start () {
+		offsetScale = 1.0f;
 		plane = GameObject.Find ("Plane");
 		dirLight = GameObject.Find ("Directional Light");
 		things = new Dictionary<string, GameObject> ();
@@ -55,32 +59,32 @@ public class GameEvent : MonoBehaviour {
 		osc_controller = GameObject.Find("OSCController").GetComponent<OSCController>();
 
 		osc_controller.onMsg += (msg) => {
+			// print (msg.Data[0].ToString());
 
-			//print (msg.Data[1].ToString());
-			var thing_str = msg.Data[1].ToString();
-
-			var pos = new Vector3((float)msg.Data[2], (float)msg.Data[3], (float)msg.Data[4]);
-			var move = new Vector3((float)msg.Data[5], (float)msg.Data[6], (float)msg.Data[7]);
-
-			var scale = (float)msg.Data[8];
-			var dur = (float)msg.Data[9];
-			var twist = (float)msg.Data[10];
-			var rigid = (int)msg.Data[11];
-			var randCam = (float)msg.Data[12];
-			var vortexRadX = (float)msg.Data[13];
-			var vortexRadY = (float)msg.Data[14];
-			var vortexAngle = (float)msg.Data[15];
-			var ripple = (float)msg.Data[16];
+			var thing_str = msg.Data[0].ToString();
+			var pos = new Vector3((float)msg.Data[1], (float)msg.Data[2], (float)msg.Data[3]);
+			var move = new Vector3((float)msg.Data[4], (float)msg.Data[5], (float)msg.Data[6]);
+			var scale = (float)msg.Data[7];
+			var dur = (float)msg.Data[8];
+			var twist = (float)msg.Data[9];
+			var rigid = (int)msg.Data[10];
+			var randCam = (float)msg.Data[11];
+			var vortexRadX = (float)msg.Data[12];
+			var vortexRadY = (float)msg.Data[13];
+			var vortexAngle = (float)msg.Data[14];
+			var ripple = (float)msg.Data[15];
 //			var skyboxName = (string)msg.Data[13];
-			var dLight = (string)msg.Data[17];
+			var dLight = (string)msg.Data[16];
 
 			GameObject thing = things[thing_str];
-			if (0 < twist) {
+			// if (0 < twist) {
 				//Debug.Log("apply");
+			if (thing) {
 				ApplyShader(thing, "Custom/Twist", twist);
-			} else {
-				//Debug.Log("not apply");
 			}
+			// } else {
+				//Debug.Log("not apply");
+			// }
 
 			if (0 < randCam) {
 				this.RandCamera(randCam);
@@ -101,13 +105,19 @@ public class GameEvent : MonoBehaviour {
 			}
 
 			//Debug.Log(scale);
-			AppendItem(thing, pos, move, scale, dur, rigid);
+			AppendItem(thing, pos, move, scale * offsetScale, dur, rigid);
+		};
+
+		osc_controller.onBang += (msg) => {
+			offsetScale = 2.0f;
 		};
 	}
 	
 	// Update is called once per a frame
 	void Update () {
-		
+		if (1.0f < offsetScale) {
+			offsetScale = offsetScale - 0.2f;
+		}
 	}
 
 	void AppendItem (GameObject thing, Vector3 pos, Vector3 move, float scale, float dur, int rigid) {
